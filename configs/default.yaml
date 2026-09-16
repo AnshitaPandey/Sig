@@ -1,0 +1,67 @@
+# ============================================================
+# Bidirectional ISL Translation System - Default Configuration
+# Phase 1: Real-time ISL → Text + Speech
+# ============================================================
+
+project:
+  name: "Bidirectional ISL Translation System"
+  version: "1.0.0-phase1"
+  seed: 42
+
+data:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  splits_dir: "data/splits"
+  num_classes: 50                    # INCLUDE-50
+  sequence_length: 45                # Temporal window size T
+  landmark_dim: 300                  # 75 landmarks × 4 (x,y,z,visibility)
+  num_pose_landmarks: 33
+  num_hand_landmarks: 21
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+
+model:
+  name: "tcn"                        # Options: gru, lstm, tcn, hybrid
+  input_dim: 300
+  hidden_dim: 128
+  num_layers: 4
+  num_classes: 50
+  dropout: 0.3
+  kernel_size: 3                     # For TCN
+  dilation_base: 2
+
+training:
+  batch_size: 32
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  epochs: 50
+  early_stopping_patience: 10
+  scheduler: "cosine"
+  device: "cuda"                     # Will fallback to cpu automatically
+  num_workers: 4
+  pin_memory: true
+
+inference:
+  window_size: 45
+  stride: 3
+  confidence_threshold: 0.65
+  stabilization_window: 7
+  min_stable_frames: 4
+  cooldown_frames: 15
+  no_sign_threshold: 0.40
+  target_fps: 25
+  max_buffer_size: 90
+
+tts:
+  enabled: true
+  rate: 160
+  volume: 0.9
+  cooldown_seconds: 1.8
+  engine: "pyttsx3"                  # Offline TTS
+
+paths:
+  checkpoint_dir: "models/checkpoints"
+  label_map: "models/label_map.json"
+  best_model: "models/checkpoints/best_model.pth"
+  logs_dir: "logs"
