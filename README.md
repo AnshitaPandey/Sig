@@ -190,6 +190,6 @@ These points form the core technical contribution of the BTP.
 
 ---
 
-**Author**: BTP Student  
+**Author**: Anshita Pandey 
 **Framework**: PyTorch + MediaPipe + OpenCV  
 **Status**: Phase 1 Complete
