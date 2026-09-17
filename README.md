@@ -1,5 +1,5 @@
 # Bidirectional Indian Sign Language Translation System  
-**Bachelor’s Thesis Project – Phase 1**
+**B. Tech. Project – Phase 1**
 
 **Title:** Bidirectional Indian Sign Language Translation System for Accessible Digital Communication
 
